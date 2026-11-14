@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/var/www/html:cached
+    ports:
+      - "8000:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: chat-app
+      DB_USER: chatapp
+      DB_PASS: chatapp
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4.13
+    environment:
+      MYSQL_DATABASE: chat-app
+      MYSQL_USER: chatapp
+      MYSQL_PASSWORD: chatapp
+      MYSQL_ROOT_PASSWORD: devroot
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql-data:

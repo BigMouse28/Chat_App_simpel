@@ -1,0 +1,28 @@
+{
+  "name": "Chat App (PHP 8.4 + MariaDB 10.11)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/var/www/html",
+  "forwardPorts": [8000, 5500],
+  "portsAttributes": {
+    "8000": {
+      "label": "PHP API (Apache)"
+    },
+    "5500": {
+      "label": "Frontend (Live Server)",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "ritwickdey.LiveServer"
+      ],
+      "settings": {
+        "liveServer.settings.host": "0.0.0.0",
+        "liveServer.settings.port": 5500
+      }
+    }
+  }
+}

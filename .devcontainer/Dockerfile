@@ -1,0 +1,11 @@
+FROM php:8.4-apache
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git unzip \
+    && docker-php-ext-install pdo_mysql \
+    && a2enmod rewrite \
+    && sed -ri 's!/var/www/html!/var/www/html/backend!g' /etc/apache2/sites-available/000-default.conf \
+    && sed -ri '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/html
