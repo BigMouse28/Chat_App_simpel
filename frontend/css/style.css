@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    color: #f9fafb;
+    background:
+        radial-gradient(ellipse at 80% 80%, rgba(8, 181, 31, 0.922), transparent 40%),
+        #15b607e3;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.loading-card {
+    width: min(100% - 2rem, 24rem);
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 1.5rem;
+    background: rgb(17 24 39 / 65%);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(12px);
+}
+
+.account-screen {
+    width: min(100% - 2rem, 24rem);
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 1.5rem;
+    background: rgb(17 24 39 / 65%);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(12px);
+    animation: appear 0.35s ease-out;
+}
+
+.open-button {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-radius: 0.65rem;
+    color: #3f9ee7;
+    background-color: #047dfe;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.open-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.open-button:focus-visible,
+.register-link:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+.register-prompt {
+    margin: 1.5rem 0 0;
+    color: #d1d5db;
+    font-size: 0.90rem;
+}
+
+.register-link {
+    color: #0bd0fc;
+    font-weight: 300;
+    text-decoration: underline;
+    text-underline-offset: 1px;
+}
+
+.logo {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0 auto 1.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 1.35rem;
+    color: white;
+    background: linear-gradient(135deg, #0af8a4, #5aec16);
+    box-shadow: 0 12px 32px rgba(6, 146, 22, 0.781);
+}
+
+.logo svg {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+}
+
+.message {
+    margin: 0.6rem 0 1.75rem;
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+.loader {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border: 3px solid rgb(255 255 255 / 18%);
+    border-top-color: #93c5fd;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
