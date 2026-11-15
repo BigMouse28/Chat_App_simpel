@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-Login
+    <nav>
+        <a href="../index.html" class="back-link">Kembali</a>
+    </nav>
+
+    <main>
+        <section class="login-card" aria-labelledby="login-title">
+            <h1 id="login-title">Login</h1>
+            <form class="login-form" action="../api/login.php" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p> &copy; 2026 Chat App Simpel. All rights reserved.</p>
+    </footer>
 </body>
 </html>

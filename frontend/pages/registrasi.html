@@ -8,6 +8,48 @@
     <link rel="stylesheet" href="../css/registrasi.css">
 </head>
 <body>
- Registrasi
+    <nav>
+        <a href="../index.html" class="back-link">Kembali</a>
+    </nav>
+
+    <main>
+        <section class="registration-card" aria-labelledby="registration-title">
+            <h1 id="registration-title">Registrasi</h1>
+            <form class="registration-form" action="../api/registrasi.php" method="POST">
+                <label for="nama-depan">Nama Depan</label>
+                <input type="text" id="nama-depan" name="nama_depan" autocomplete="given-name" placeholder="Masukkan nama depan" required>
+
+                <label for="nama-belakang">Nama Belakang</label>
+                <input type="text" id="nama-belakang" name="nama_belakang" autocomplete="family-name" placeholder="Masukkan nama belakang" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="ilhamxxxx@gmail.com" required>
+
+                <label for="nomor-telepon">Nomor Telepon</label>
+                <div class="phone-input">
+                    <details class="country-picker">
+                        <summary class="country-picker-toggle" aria-label="Pilih kode negara">
+                            <span class="selected-country-flag" aria-hidden="true"></span>
+                            <span class="selected-country-code">+62</span>
+                            <svg class="country-chevron" viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="m5 7.5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </summary>
+                        <div class="country-list" role="list" aria-label="Daftar kode negara"></div>
+                    </details>
+
+                    <input type="hidden" id="kode-negara" name="kode_negara" value="+62">
+                    <input type="tel" id="nomor-telepon" name="nomor_telepon" autocomplete="tel-national" placeholder="8571084xxxx" required>
+                </div>
+
+                <button type="submit">Registrasi</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p> &copy; 2026 Chat App Simpel. All rights reserved.</p>
+    </footer>
+    <script src="../js/registrasi.js" defer></script>
 </body>
 </html>
