@@ -16,33 +16,55 @@
         <section class="registration-card" aria-labelledby="registration-title">
             <h1 id="registration-title">Registrasi</h1>
             <form class="registration-form" action="../api/registrasi.php" method="POST">
+
+                <!-- Rehgistrasi Nama depan-->
                 <label for="nama-depan">Nama Depan</label>
                 <input type="text" id="nama-depan" name="nama_depan" autocomplete="given-name" placeholder="Masukkan nama depan" required>
+                <div class="error" id="error-nama-depan"></div>
 
+                <!-- Registrasi Nama belakang -->
                 <label for="nama-belakang">Nama Belakang</label>
                 <input type="text" id="nama-belakang" name="nama_belakang" autocomplete="family-name" placeholder="Masukkan nama belakang" required>
+                <div class="error" id="error-nama-belakang"></div>
 
+                <!-- Registrasi Email -->
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="ilhamxxxx@gmail.com" required>
+                <div class="error" id="error-email"></div>
 
-                <label for="nomor-telepon">Nomor Telepon</label>
-                <div class="phone-input">
-                    <details class="country-picker">
-                        <summary class="country-picker-toggle" aria-label="Pilih kode negara">
-                            <span class="selected-country-flag" aria-hidden="true"></span>
-                            <span class="selected-country-code">+62</span>
-                            <svg class="country-chevron" viewBox="0 0 20 20" aria-hidden="true">
-                                <path d="m5 7.5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </summary>
-                        <div class="country-list" role="list" aria-label="Daftar kode negara"></div>
-                    </details>
-
-                    <input type="hidden" id="kode-negara" name="kode_negara" value="+62">
-                    <input type="tel" id="nomor-telepon" name="nomor_telepon" autocomplete="tel-national" placeholder="8571084xxxx" required>
+                <!-- Registrasi Nomor HP -->
+                <label for="hp">Nomor HP</label>
+                <div class="kolom-hp">
+                    <button type="button" class="pilih-negara" id="btn-negara" aria-haspopup="listbox" aria-expanded="false" aria-label="pilih kode negara">
+                        <img class="bendera" id="bendera-terpilih" src="../assets/img/flags/id.svg" alt="Bendera Indonesia">
+                        <span id="kode-terpilih">+62</span>
+                        <svg class="ikon" viewbox="0 0 24 24" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+                    </button>
+                    <input type="tel" id="hp" autocomplete="tel-national" placeholder="Masukkan Nomor HP anda" inputmode="tel" required>
+                    <div class="daftar-negara" id="daftar-negara" hidden>
+                        <input type="search" id="cari-negara" placeholder="Cari negara atau kode" autocomplete="off">
+                        <ul id="isi-negara" role="listbox"></ul>
+                    </div>
                 </div>
+                <div class="error" id="error-hp"></div>
 
-                <button type="submit">Registrasi</button>
+                <!-- Registrasi password -->
+                <label for="sandi">sandi</label>
+                <div class="kolom-sandi">
+                    <input type="password" id="sandi" autocomplete="new-password" placeholder="Min 8 karakter yang terdiri angka dan huruf" required>
+                    <button type="button" class="lihat" data-target="sandi">lihat</button>
+                </div>
+                <div class="error" id="error-sandi"></div>
+
+                <!-- Registrasi konfirmasi password -->
+                <label for="konfirmasi-sandi">Ulangi Sandi</label>
+                <div class="kolom-sandi">
+                    <input type="password" id="konfirmasi-sandi" autocomplete="new-password" placeholder="masukkan kata sandi yang sama">
+                    <button type="button" class="lihat" data-target="konfirmasi-sandi">lihat</button>
+                </div>
+                <div class="error" id="error-konfirmasi-sandi"></div>
+
+                <button type="submit" class="tombol">Registrasi</button>
             </form>
         </section>
     </main>

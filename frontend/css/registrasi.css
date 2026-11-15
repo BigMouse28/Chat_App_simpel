@@ -15,7 +15,7 @@ body {
 
 nav,
 footer {
-    width: min(100%, 30rem);
+    width: min(100%, 32rem);
     margin-inline: auto;
 }
 
@@ -36,7 +36,7 @@ main {
 }
 
 .registration-card {
-    width: min(100%, 30rem);
+    width: min(100%, 32rem);
     padding: 2rem;
     border: 1px solid #e1e7ef;
     border-radius: 1rem;
@@ -51,16 +51,16 @@ h1 {
 
 .registration-form {
     display: grid;
-    gap: 0.6rem;
+    gap: 0.55rem;
 }
 
 .registration-form label {
-    margin-top: 0.5rem;
+    margin-top: 0.55rem;
     font-size: 0.95rem;
     font-weight: 600;
 }
 
-.registration-form input {
+.registration-form input:not([type="hidden"]) {
     width: 100%;
     min-width: 0;
     padding: 0.75rem 0.85rem;
@@ -71,35 +71,28 @@ h1 {
     font: inherit;
 }
 
+.registration-form input[aria-invalid="true"] {
+    border-color: #c62828;
+}
+
 .registration-form input:focus-visible,
-.country-picker-toggle:focus-visible,
-.country-option:focus-visible,
 .registration-form button:focus-visible {
     outline: 3px solid #80bdff;
     outline-offset: 2px;
 }
 
-.phone-input {
+.kolom-hp,
+.kolom-sandi {
     display: flex;
     align-items: stretch;
 }
 
-.country-picker {
+.kolom-hp {
     position: relative;
-    flex: 0 0 auto;
 }
 
-.country-picker summary {
-    list-style: none;
-}
-
-.country-picker summary::-webkit-details-marker {
-    display: none;
-}
-
-.country-picker-toggle {
-    height: 100%;
-    min-width: 6.8rem;
+.pilih-negara {
+    min-width: 6rem;
     padding: 0 0.65rem;
     display: flex;
     align-items: center;
@@ -108,65 +101,69 @@ h1 {
     border: 1px solid #cbd5e1;
     border-right: 0;
     border-radius: 0.5rem 0 0 0.5rem;
+    color: inherit;
     background: #f8fafc;
+    font: inherit;
     cursor: pointer;
 }
 
-.selected-country-flag,
-.country-flag {
+.bendera,
+.bendera-opsi {
     width: 1.5rem;
     height: 1rem;
-    display: inline-flex;
     flex: 0 0 auto;
-    overflow: hidden;
+    object-fit: cover;
     border: 1px solid rgb(15 23 42 / 12%);
     border-radius: 0.15rem;
 }
 
-.country-flag svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.selected-country-code,
-.country-option-code {
-    white-space: nowrap;
-    font-size: 0.9rem;
-}
-
-.country-chevron {
+.pilih-negara .ikon {
     width: 1rem;
     height: 1rem;
-    transition: transform 0.15s ease;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
 }
 
-.country-picker[open] .country-chevron {
-    transform: rotate(180deg);
-}
-
-.phone-input > input[type="tel"] {
+#hp {
     border-radius: 0 0.5rem 0.5rem 0;
 }
 
-.country-list {
+.daftar-negara {
     position: absolute;
     z-index: 2;
     top: calc(100% + 0.35rem);
     left: 0;
-    width: min(18rem, calc(100vw - 3rem));
-    max-height: 14rem;
-    overflow-y: auto;
-    padding: 0.3rem;
+    width: min(20rem, 100%);
+    max-height: 16rem;
+    overflow: auto;
+    padding: 0.45rem;
     border: 1px solid #cbd5e1;
     border-radius: 0.6rem;
     background: #fff;
     box-shadow: 0 0.75rem 1.5rem rgb(15 23 42 / 16%);
 }
 
-.country-option {
+.daftar-negara[hidden] {
+    display: none;
+}
+
+#cari-negara {
+    position: sticky;
+    top: 0;
+    margin-bottom: 0.35rem;
+}
+
+#isi-negara {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.opsi-negara {
     width: 100%;
-    min-height: 2.5rem;
+    min-height: 2.6rem;
     padding: 0.45rem 0.55rem;
     display: flex;
     align-items: center;
@@ -180,19 +177,55 @@ h1 {
     cursor: pointer;
 }
 
-.country-option:hover {
+.opsi-negara:hover {
     background: #eef4fb;
 }
 
-.country-name {
+.opsi-negara:disabled {
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.opsi-negara:disabled:hover {
+    background: transparent;
+}
+
+.nama-negara {
     flex: 1;
 }
 
-.country-option-code {
+.kode-negara {
     color: #526174;
+    white-space: nowrap;
 }
 
-.registration-form > button {
+.negara-kosong {
+    padding: 0.65rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.kolom-sandi input {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.lihat {
+    padding: 0 0.8rem;
+    border: 1px solid #cbd5e1;
+    border-left: 0;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: #1769aa;
+    background: #f8fafc;
+    font: inherit;
+    cursor: pointer;
+}
+
+.error:not(:empty) {
+    color: #b42318;
+    font-size: 0.85rem;
+}
+
+.registration-form > .tombol {
     margin-top: 1rem;
     padding: 0.8rem 1rem;
     border: 0;
@@ -204,7 +237,7 @@ h1 {
     cursor: pointer;
 }
 
-.registration-form > button:hover {
+.registration-form > .tombol:hover {
     background: #12578f;
 }
 
@@ -221,5 +254,10 @@ footer {
 
     .registration-card {
         padding: 1.25rem;
+    }
+
+    .pilih-negara {
+        min-width: 5.25rem;
+        padding-inline: 0.4rem;
     }
 }

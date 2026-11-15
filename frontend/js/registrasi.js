@@ -1,161 +1,262 @@
 
-const countries = [
-    {
-        name: "Indonesia",
-        code: "+62",
-        flag: '<rect width="24" height="8" fill="#e31b23"/><rect y="8" width="24" height="8" fill="#fff"/>'
-    },
-    {
-        name: "Australia",
-        code: "+61",
-        flag: '<rect width="24" height="16" fill="#00008b"/><path d="M0 0 10 6M10 0 0 6" stroke="#fff" stroke-width="2"/><path d="M0 0 10 6M10 0 0 6" stroke="#c8102e" stroke-width=".8"/><path d="M5 0v6M0 3h10" stroke="#fff" stroke-width="2"/><path d="M5 0v6M0 3h10" stroke="#c8102e" stroke-width=".8"/><circle cx="17" cy="4" r="1" fill="#fff"/><circle cx="20" cy="9" r="1" fill="#fff"/><circle cx="15" cy="12" r="1" fill="#fff"/><circle cx="21" cy="14" r="1" fill="#fff"/>'
-    },
-    {
-        name: "Amerika Serikat",
-        code: "+1",
-        flag: '<rect width="24" height="16" fill="#fff"/><path d="M0 0h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0z" fill="#b22234"/><rect width="10.5" height="8.6" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="1.5" r=".45"/><circle cx="5" cy="1.5" r=".45"/><circle cx="8" cy="1.5" r=".45"/><circle cx="3.5" cy="3.5" r=".45"/><circle cx="6.5" cy="3.5" r=".45"/><circle cx="2" cy="5.5" r=".45"/><circle cx="5" cy="5.5" r=".45"/><circle cx="8" cy="5.5" r=".45"/><circle cx="3.5" cy="7.5" r=".45"/><circle cx="6.5" cy="7.5" r=".45"/></g>'
-    },
-    {
-        name: "Britania Raya",
-        code: "+44",
-        flag: '<rect width="24" height="16" fill="#012169"/><path d="m0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="4"/><path d="m0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.5"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="2.5"/>'
-    },
-    {
-        name: "Singapura",
-        code: "+65",
-        flag: '<rect width="24" height="8" fill="#ed2939"/><rect y="8" width="24" height="8" fill="#fff"/><circle cx="5" cy="4" r="2" fill="#fff"/><circle cx="5.8" cy="3.5" r="1.7" fill="#ed2939"/><g fill="#fff"><circle cx="8" cy="2" r=".45"/><circle cx="9.5" cy="3.2" r=".45"/><circle cx="9" cy="5" r=".45"/><circle cx="7" cy="5" r=".45"/><circle cx="6.5" cy="3.4" r=".45"/></g>'
-    },
-    {
-        name: "Malaysia",
-        code: "+60",
-        flag: '<rect width="24" height="16" fill="#fff"/><path d="M0 0h24v1.8H0zm0 3.2h24V5H0zm0 3.2h24V8H0zm0 3.2h24v1.8H0zm0 3.2h24V16H0z" fill="#c8102e"/><rect width="11" height="8" fill="#010066"/><circle cx="4.3" cy="4" r="2.6" fill="#ffcc00"/><circle cx="5.1" cy="3.5" r="2.1" fill="#010066"/><path d="m8 1.8.6 1.4 1.5.1-1.1 1 .3 1.5L8 5l-1.3.8L7 4.3l-1.1-1 1.5-.1z" fill="#ffcc00"/>'
-    },
-    {
-        name: "Jepang",
-        code: "+81",
-        flag: '<rect width="24" height="16" fill="#fff"/><circle cx="12" cy="8" r="4.5" fill="#bc002d"/>'
-    },
-    {
-        name: "Korea Selatan",
-        code: "+82",
-        flag: '<rect width="24" height="16" fill="#fff"/><path d="M12 3.5a4.5 4.5 0 0 1 0 9 2.25 2.25 0 0 0 0-4.5 2.25 2.25 0 0 1 0-4.5" fill="#cd2e3a"/><path d="M12 12.5a4.5 4.5 0 0 1 0-9 2.25 2.25 0 0 0 0 4.5 2.25 2.25 0 0 1 0 4.5" fill="#0047a0"/><path d="m3 3 3 1.5m-3 0L6 3m12 9 3 1.5m-3 0 3-1.5" stroke="#111" stroke-width="1"/>'
-    },
-    {
-        name: "Tiongkok",
-        code: "+86",
-        flag: '<rect width="24" height="16" fill="#de2910"/><path d="m5 2 .8 2.1L8 4.2 6.3 5.5l.6 2.1L5 6.4l-1.9 1.2.6-2.1L2 4.2l2.2-.1z" fill="#ffde00"/><g fill="#ffde00"><circle cx="10" cy="2.5" r=".7"/><circle cx="12" cy="4.5" r=".7"/><circle cx="12" cy="7" r=".7"/><circle cx="10" cy="9" r=".7"/></g>'
-    },
-    {
-        name: "India",
-        code: "+91",
-        flag: '<rect width="24" height="5.33" fill="#ff9933"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.67" width="24" height="5.33" fill="#138808"/><circle cx="12" cy="8" r="2" fill="none" stroke="#000080" stroke-width=".6"/><path d="M12 6v4m-2-2h4m-3.4-1.4 2.8 2.8m0-2.8-2.8 2.8" stroke="#000080" stroke-width=".35"/>'
-    },
-    {
-        name: "Filipina",
-        code: "+63",
-        flag: '<rect width="24" height="8" fill="#0038a8"/><rect y="8" width="24" height="8" fill="#ce1126"/><path d="M0 0v16l12-8z" fill="#fff"/><circle cx="3.2" cy="8" r="1.4" fill="#fcd116"/><circle cx="1" cy="3" r=".6" fill="#fcd116"/><circle cx="1" cy="13" r=".6" fill="#fcd116"/><circle cx="9" cy="8" r=".6" fill="#fcd116"/>'
-    },
-    {
-        name: "Thailand",
-        code: "+66",
-        flag: '<rect width="24" height="16" fill="#a51931"/><rect y="2.67" width="24" height="10.66" fill="#fff"/><rect y="5.33" width="24" height="5.34" fill="#2d2a4a"/>'
-    },
-    {
-        name: "Vietnam",
-        code: "+84",
-        flag: '<rect width="24" height="16" fill="#da251d"/><path d="m12 3 1.2 3.5 3.7.1-3 2.2 1.1 3.6-3-2.1-3 2.1 1.1-3.6-3-2.2 3.7-.1z" fill="#ff0"/>'
-    },
-    {
-        name: "Selandia Baru",
-        code: "+64",
-        flag: '<rect width="24" height="16" fill="#00247d"/><path d="M1 1 9 6M9 1 1 6" stroke="#fff" stroke-width="1.6"/><path d="M1 1 9 6M9 1 1 6" stroke="#cf142b" stroke-width=".6"/><path d="M5 1v5M1 3.5h8" stroke="#fff" stroke-width="2"/><path d="M5 1v5M1 3.5h8" stroke="#cf142b" stroke-width=".8"/><path d="m17 3 .5 1.2 1.3.1-1 .8.4 1.3-1.2-.7-1.1.7.4-1.3-1-.8 1.3-.1zM20 9l.4 1 1.1.1-.8.7.3 1.1-1-.6-1 .6.3-1.1-.8-.7 1.1-.1zM15 11l.4 1 1.1.1-.8.7.3 1.1-1-.6-1 .6.3-1.1-.8-.7 1.1-.1z" fill="#cf142b" stroke="#fff" stroke-width=".4"/>'
-    },
-    {
-        name: "Jerman",
-        code: "+49",
-        flag: '<rect width="24" height="5.33" fill="#000"/><rect y="5.33" width="24" height="5.34" fill="#d00"/><rect y="10.67" width="24" height="5.33" fill="#ffce00"/>'
-    },
-    {
-        name: "Prancis",
-        code: "+33",
-        flag: '<rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ed2939"/>'
-    },
-    {
-        name: "Belanda",
-        code: "+31",
-        flag: '<rect width="24" height="5.33" fill="#ae1c28"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.67" width="24" height="5.33" fill="#21468b"/>'
-    },
-    {
-        name: "Uni Emirat Arab",
-        code: "+971",
-        flag: '<rect width="24" height="16" fill="#fff"/><rect width="6" height="16" fill="#f00"/><rect x="6" width="18" height="5.33" fill="#00732f"/><rect x="6" y="10.67" width="18" height="5.33" fill="#000"/>'
-    },
-    {
-        name: "Arab Saudi",
-        code: "+966",
-        flag: '<rect width="24" height="16" fill="#006c35"/><path d="M5 10h14m-13-1h12" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="m7 11 1-.7 1 .7 1-.7 1 .7 1-.7 1 .7 1-.7 1 .7" fill="none" stroke="#fff" stroke-width=".6"/>'
-    },
-    {
-        name: "Mauritius",
-        code: "+230",
-        flag: '<rect width="24" height="4" fill="#ea2839"/><rect y="4" width="24" height="4" fill="#1a206d"/><rect y="8" width="24" height="4" fill="#ffd500"/><rect y="12" width="24" height="4" fill="#00a551"/>'
+const flagAssets = `
+    ad ae af ag ai al am ao aq ar arab as asean at au aw ax az
+    ba bb bd be bf bg bh bi bj bl bm bn bo bq br bs bt bv bw by bz
+    ca cc cd cefta cf cg ch ci ck cl cm cn co cp cr cu cv cw cx cy cz
+    de dg dj dk dm do dz eac ec ee eg eh er es es-ct es-ga es-pv et eu
+    fi fj fk fm fo fr ga gb gb-eng gb-nir gb-sct gb-wls gd ge gf gg gh gi
+    gl gm gn gp gq gr gs gt gu gw gy hk hm hn hr ht hu ic id ie il im in
+    io iq ir is it je jm jo jp ke kg kh ki km kn kp kr kw ky kz la lb lc
+    li lk lr ls lt lu lv ly ma mc md me mf mg mh mk ml mm mn mo mp mq mr
+    ms mt mu mv mw mx my mz na nc ne nf ng ni nl no np nr nu nz om pa pc
+    pe pf pg ph pk pl pm pn pr ps pt pw py qa re ro rs ru rw sa sb sc sd
+    se sg sh sh-ac sh-hl sh-ta si sj sk sl sm sn so sr ss st sv sx sy sz
+    tc td tf tg th tj tk tl tm tn to tr tt tv tw tz ua ug um un us uy uz
+    va vc ve vg vi vn vu wf ws xk xx ye yt za zm zw
+`.trim().split(/\s+/);
+
+const dialingCodes = Object.fromEntries(`
+    ad:+376 ae:+971 af:+93 ag:+1268 ai:+1264 al:+355 am:+374 ao:+244 ar:+54
+    as:+1684 at:+43 au:+61 aw:+297 ax:+358 az:+994 ba:+387 bb:+1246 bd:+880
+    be:+32 bf:+226 bg:+359 bh:+973 bi:+257 bj:+229 bl:+590 bm:+1441 bn:+673
+    bo:+591 bq:+599 br:+55 bs:+1242 bt:+975 bv:+47 bw:+267 by:+375 bz:+501
+    ca:+1 cc:+61 cd:+243 cf:+236 cg:+242 ch:+41 ci:+225 ck:+682 cl:+56
+    cm:+237 cn:+86 co:+57 cr:+506 cu:+53 cv:+238 cw:+599 cx:+61 cy:+357
+    cz:+420 de:+49 dj:+253 dk:+45 dm:+1767 do:+1 dz:+213 ec:+593 ee:+372
+    eg:+20 eh:+212 er:+291 es:+34 et:+251 fi:+358 fj:+679 fk:+500 fm:+691
+    fo:+298 fr:+33 ga:+241 gb:+44 gd:+1473 ge:+995 gf:+594 gg:+44 gh:+233
+    gi:+350 gl:+299 gm:+220 gn:+224 gp:+590 gq:+240 gr:+30 gs:+500 gt:+502
+    gu:+1671 gw:+245 gy:+592 hk:+852 hn:+504 hr:+385 ht:+509 hu:+36 id:+62
+    ie:+353 il:+972 im:+44 in:+91 io:+246 iq:+964 ir:+98 is:+354 it:+39
+    je:+44 jm:+1876 jo:+962 jp:+81 ke:+254 kg:+996 kh:+855 ki:+686 km:+269
+    kn:+1869 kp:+850 kr:+82 kw:+965 ky:+1345 kz:+7 la:+856 lb:+961 lc:+1758
+    li:+423 lk:+94 lr:+231 ls:+266 lt:+370 lu:+352 lv:+371 ly:+218 ma:+212
+    mc:+377 md:+373 me:+382 mf:+590 mg:+261 mh:+692 mk:+389 ml:+223 mm:+95
+    mn:+976 mo:+853 mp:+1670 mq:+596 mr:+222 ms:+1664 mt:+356 mu:+230 mv:+960
+    mw:+265 mx:+52 my:+60 mz:+258 na:+264 nc:+687 ne:+227 nf:+672 ng:+234
+    ni:+505 nl:+31 no:+47 np:+977 nr:+674 nu:+683 nz:+64 om:+968 pa:+507
+    pe:+51 pf:+689 pg:+675 ph:+63 pk:+92 pl:+48 pm:+508 pn:+64 pr:+1 ps:+970
+    pt:+351 pw:+680 py:+595 qa:+974 re:+262 ro:+40 rs:+381 ru:+7 rw:+250
+    sa:+966 sb:+677 sc:+248 sd:+249 se:+46 sg:+65 sh:+290 si:+386 sj:+47
+    sk:+421 sl:+232 sm:+378 sn:+221 so:+252 sr:+597 ss:+211 st:+239 sv:+503
+    sx:+1721 sy:+963 sz:+268 tc:+1649 td:+235 tf:+262 tg:+228 th:+66 tj:+992
+    tk:+690 tl:+670 tm:+993 tn:+216 to:+676 tr:+90 tt:+1868 tv:+688 tw:+886
+    tz:+255 ua:+380 ug:+256 um:+1 us:+1 uy:+598 uz:+998 va:+39 vc:+1784
+    ve:+58 vg:+1284 vi:+1340 vn:+84 vu:+678 wf:+681 ws:+685 xk:+383 ye:+967
+    yt:+262 za:+27 zm:+260 zw:+263
+    aq:+672 dg:+246 hm:+672 ic:+34 es-ct:+34 es-ga:+34 es-pv:+34
+    gb-eng:+44 gb-nir:+44 gb-sct:+44 gb-wls:+44 sh-ac:+247 sh-hl:+290 sh-ta:+290
+`.trim().split(/\s+/).map((entry) => entry.split(":")));
+
+const specialCountryNames = {
+    arab: "Liga Arab",
+    asean: "ASEAN",
+    cefta: "CEFTA",
+    eac: "Komunitas Afrika Timur",
+    eu: "Uni Eropa",
+    "es-ct": "Katalonia",
+    "es-ga": "Galicia",
+    "es-pv": "Negeri Basque",
+    "gb-eng": "Inggris",
+    "gb-nir": "Irlandia Utara",
+    "gb-sct": "Skotlandia",
+    "gb-wls": "Wales",
+    ic: "Kepulauan Kanari",
+    pc: "Komunitas Pasifik",
+    un: "Perserikatan Bangsa-Bangsa",
+    xx: "Wilayah tidak diketahui"
+};
+const regionNames = new Intl.DisplayNames(["id"], { type: "region" });
+
+const countries = flagAssets.map((flag) => ({
+    name: specialCountryNames[flag] ?? (flag.length === 2 ? regionNames.of(flag.toUpperCase()) : flag),
+    code: dialingCodes[flag] ?? "",
+    flag
+}));
+
+const form = document.querySelector(".registration-form");
+const countryButton = document.querySelector("#btn-negara");
+const countryDropdown = document.querySelector("#daftar-negara");
+const countrySearch = document.querySelector("#cari-negara");
+const countryOptions = document.querySelector("#isi-negara");
+const selectedFlag = document.querySelector("#bendera-terpilih");
+const selectedCode = document.querySelector("#kode-terpilih");
+const phoneInput = document.querySelector("#hp");
+const passwordInput = document.querySelector("#sandi");
+const confirmationInput = document.querySelector("#konfirmasi-sandi");
+
+const countryCodeInput = document.createElement("input");
+countryCodeInput.type = "hidden";
+countryCodeInput.name = "kode_negara";
+form.append(countryCodeInput);
+
+phoneInput.name = "hp";
+passwordInput.name = "sandi";
+confirmationInput.name = "konfirmasi_sandi";
+confirmationInput.required = true;
+
+function flagSource(country) {
+    return `../assets/img/flags/${country.flag}.svg`;
+}
+
+function setCountryDropdown(open) {
+    countryDropdown.hidden = !open;
+    countryButton.setAttribute("aria-expanded", String(open));
+    if (open) {
+        countrySearch.focus();
     }
-];
-
-const picker = document.querySelector(".country-picker");
-const countryList = document.querySelector(".country-list");
-const selectedFlag = document.querySelector(".selected-country-flag");
-const selectedCode = document.querySelector(".selected-country-code");
-const countryCodeInput = document.querySelector("#kode-negara");
-
-function createFlag(country) {
-    const flag = document.createElement("span");
-    flag.className = "country-flag";
-    flag.setAttribute("aria-hidden", "true");
-    flag.innerHTML = `<svg viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">${country.flag}</svg>`;
-    return flag;
 }
 
 function selectCountry(country, returnFocus = true) {
-    selectedFlag.replaceChildren(createFlag(country));
+    selectedFlag.src = flagSource(country);
+    selectedFlag.alt = "";
     selectedCode.textContent = country.code;
     countryCodeInput.value = country.code;
-    picker.open = false;
+    setCountryDropdown(false);
     if (returnFocus) {
-        picker.querySelector("summary").focus();
+        countryButton.focus();
     }
 }
 
-for (const country of countries) {
-    const option = document.createElement("button");
-    option.type = "button";
-    option.className = "country-option";
-    option.setAttribute("aria-label", `${country.name}, ${country.code}`);
+function renderCountries(query = "") {
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    const matches = countries.filter(({ name, code }) =>
+        `${name} ${code}`.toLocaleLowerCase().includes(normalizedQuery)
+    );
 
-    const name = document.createElement("span");
-    name.className = "country-name";
-    name.textContent = country.name;
+    countryOptions.replaceChildren();
 
-    const code = document.createElement("span");
-    code.className = "country-option-code";
-    code.textContent = country.code;
+    if (matches.length === 0) {
+        const emptyState = document.createElement("li");
+        emptyState.className = "negara-kosong";
+        emptyState.textContent = "Negara tidak ditemukan";
+        countryOptions.append(emptyState);
+        return;
+    }
 
-    option.append(createFlag(country), name, code);
-    option.addEventListener("click", () => selectCountry(country));
-    countryList.append(option);
+    for (const country of matches) {
+        const item = document.createElement("li");
+        const option = document.createElement("button");
+        option.type = "button";
+        option.className = "opsi-negara";
+        option.disabled = !country.code;
+        option.setAttribute("role", "option");
+        option.setAttribute(
+            "aria-label",
+            `${country.name}, ${country.code || "kode telepon tidak tersedia"}`
+        );
+
+        const flag = document.createElement("img");
+        flag.className = "bendera-opsi";
+        flag.src = flagSource(country);
+        flag.alt = "";
+
+        const name = document.createElement("span");
+        name.className = "nama-negara";
+        name.textContent = country.name;
+
+        const code = document.createElement("span");
+        code.className = "kode-negara";
+        code.textContent = country.code || "—";
+
+        option.append(flag, name, code);
+        option.addEventListener("click", () => selectCountry(country));
+        item.append(option);
+        countryOptions.append(item);
+    }
 }
 
-selectCountry(countries[0], false);
+function showError(input, errorId, message) {
+    const error = document.querySelector(`#${errorId}`);
+    error.textContent = message;
+    input.setCustomValidity(message);
+
+    if (message) {
+        input.setAttribute("aria-invalid", "true");
+    } else {
+        input.removeAttribute("aria-invalid");
+    }
+}
+
+function validatePhone() {
+    const digitCount = phoneInput.value.replace(/\D/g, "").length;
+    const message = digitCount < 6 || digitCount > 15
+        ? "Masukkan nomor HP dengan 6 sampai 15 angka."
+        : "";
+    showError(phoneInput, "error-hp", message);
+    return !message;
+}
+
+function validatePassword() {
+    const valid = passwordInput.value.length >= 8
+        && /[a-z]/i.test(passwordInput.value)
+        && /\d/.test(passwordInput.value);
+    const message = valid
+        ? ""
+        : "Kata sandi harus minimal 8 karakter dan terdiri dari huruf serta angka.";
+    showError(passwordInput, "error-sandi", message);
+    return valid;
+}
+
+function validateConfirmation() {
+    const message = confirmationInput.value === passwordInput.value
+        ? ""
+        : "Kata sandi ulang tidak sama.";
+    showError(confirmationInput, "error-konfirmasi-sandi", message);
+    return !message;
+}
+
+countryButton.addEventListener("click", () => {
+    setCountryDropdown(countryDropdown.hidden);
+});
+
+countrySearch.addEventListener("input", () => {
+    renderCountries(countrySearch.value);
+});
+
+countryDropdown.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        setCountryDropdown(false);
+        countryButton.focus();
+    }
+});
 
 document.addEventListener("click", (event) => {
-    if (!picker.contains(event.target)) {
-        picker.open = false;
+    if (!countryDropdown.contains(event.target) && !countryButton.contains(event.target)) {
+        setCountryDropdown(false);
     }
 });
 
-picker.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && picker.open) {
-        picker.open = false;
-        picker.querySelector("summary").focus();
+for (const toggle of document.querySelectorAll(".lihat")) {
+    toggle.setAttribute("aria-pressed", "false");
+    toggle.addEventListener("click", () => {
+        const input = document.querySelector(`#${toggle.dataset.target}`);
+        const isVisible = input.type === "text";
+        input.type = isVisible ? "password" : "text";
+        toggle.textContent = isVisible ? "Lihat" : "Sembunyikan";
+        toggle.setAttribute("aria-pressed", String(!isVisible));
+    });
+}
+
+phoneInput.addEventListener("input", validatePhone);
+passwordInput.addEventListener("input", () => {
+    validatePassword();
+    if (confirmationInput.value) {
+        validateConfirmation();
     }
 });
+confirmationInput.addEventListener("input", validateConfirmation);
+
+form.addEventListener("submit", (event) => {
+    const isPhoneValid = validatePhone();
+    const isPasswordValid = validatePassword();
+    const isConfirmationValid = validateConfirmation();
+    const isValid = isPhoneValid && isPasswordValid && isConfirmationValid;
+    if (!isValid) {
+        event.preventDefault();
+        form.reportValidity();
+    }
+});
+
+renderCountries();
+selectCountry(countries.find(({ flag }) => flag === "id"), false);
