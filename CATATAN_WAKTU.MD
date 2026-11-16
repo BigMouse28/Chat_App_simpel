@@ -7,4 +7,4 @@
 
 [Minggu, 15.11.2026/12.13-13.06] menambahkan  fitur registrasi & login (meskipun masih belum sempurna)
 
-[Senin, 16.11.2026/14.50-16.51] menambahkan fitur kode otp untuk sisanya full Ai tetapi dengan arsitektur ku sendiri
+[Senin, 16.11.2026/14.50-16.51] menambahkan fitur kode otp untuk sisanya full Ai tetapi dengan alur ku sendiri
