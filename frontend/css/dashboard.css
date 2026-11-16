@@ -74,7 +74,15 @@ button {
 .brand-icon {
     width: 2.25rem;
     height: 2.25rem;
-    border-radius: 0.75rem;
+    border-radius: 0.8rem;
+    color: #fff;
+    background: linear-gradient(135deg, #0af8a4, #5aec16);
+    box-shadow: 0 0.4rem 1rem rgb(6 146 22 / 45%);
+}
+
+.brand-icon svg {
+    width: 1.4rem;
+    height: 1.4rem;
 }
 
 .account {
@@ -396,7 +404,7 @@ button {
     font-size: 0.82rem;
 }
 
-.conversation-person p + p {
+.conversation-person p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

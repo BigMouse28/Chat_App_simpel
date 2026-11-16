@@ -1,25 +1,25 @@
-import { createId, saveState } from "./storage.js";
+import { createId, saveDatabase } from "./storage.js";
 
-export function initializeChat(state, onEditContact, showAlert) {
+export function initializeChat(database, account, onManageContact, showAlert) {
     const emptyState = document.querySelector("#empty-chat");
     const conversation = document.querySelector("#conversation");
     const nameHeading = document.querySelector("#conversation-name");
     const phoneHeading = document.querySelector("#conversation-phone");
+    const statusHeading = document.querySelector("#conversation-status");
     const bioHeading = document.querySelector("#conversation-bio");
     const avatar = document.querySelector("#conversation-avatar");
     const messageList = document.querySelector("#message-list");
     const emptyMessages = document.querySelector("#empty-messages");
     const messageForm = document.querySelector("#message-form");
     const messageInput = document.querySelector("#message-input");
-    const incomingForm = document.querySelector("#incoming-message-form");
-    const incomingInput = document.querySelector("#incoming-message-input");
-    let activeContactId = "";
+    const manageContactButton = document.querySelector("#edit-active-contact");
+    let activeEmail = "";
 
-    function render(id = activeContactId) {
-        activeContactId = id;
-        const contact = state.contacts.find((entry) => entry.id === activeContactId);
-        if (!contact) {
-            activeContactId = "";
+    function render(peerEmail = activeEmail) {
+        activeEmail = peerEmail;
+        const peer = database.accounts[activeEmail]?.profile;
+        if (!peer || activeEmail === account.profile.email) {
+            activeEmail = "";
             conversation.hidden = true;
             emptyState.hidden = false;
             return;
@@ -27,16 +27,32 @@ export function initializeChat(state, onEditContact, showAlert) {
 
         emptyState.hidden = true;
         conversation.hidden = false;
-        nameHeading.textContent = contact.name;
-        phoneHeading.textContent = contact.phone;
-        bioHeading.textContent = contact.bio;
-        avatar.textContent = contact.name.charAt(0).toLocaleUpperCase() || "K";
+        nameHeading.textContent = peer.name;
+        phoneHeading.textContent = peer.phone;
+        statusHeading.textContent = `Status: ${peer.status || "Aktif"}`;
+        bioHeading.textContent = peer.bio || "Belum ada info profil.";
+        avatar.replaceChildren();
+        if (peer.avatar) {
+            const image = document.createElement("img");
+            image.src = peer.avatar;
+            image.alt = "";
+            image.loading = "lazy";
+            avatar.append(image);
+        } else {
+            avatar.textContent = peer.name.charAt(0).toLocaleUpperCase() || "K";
+        }
 
-        const messages = state.messages[activeContactId] || [];
+        const isContact = account.contacts.some((contact) => contact.email === activeEmail);
+        manageContactButton.textContent = isContact ? "Ubah kontak" : "Simpan kontak";
+        const messages = database.messages.filter((message) =>
+            (message.sender === account.profile.email && message.recipient === activeEmail)
+            || (message.sender === activeEmail && message.recipient === account.profile.email)
+        );
         messageList.replaceChildren();
         for (const message of messages) {
+            const direction = message.sender === account.profile.email ? "sent" : "received";
             const item = document.createElement("li");
-            item.className = `message ${message.direction === "sent" ? "message--sent" : "message--received"}`;
+            item.className = `message ${direction === "sent" ? "message--sent" : "message--received"}`;
             item.append(document.createTextNode(message.text));
 
             const time = document.createElement("time");
@@ -55,39 +71,31 @@ export function initializeChat(state, onEditContact, showAlert) {
         messageList.scrollTop = messageList.scrollHeight;
     }
 
-    function addMessage(direction, text) {
-        if (!activeContactId) {
+    function send(text) {
+        if (!activeEmail || !database.accounts[activeEmail]) {
+            showAlert("Penerima tidak ditemukan. Tambahkan nomor yang terdaftar.");
             return false;
         }
-
         const content = text.trim();
         if (!content) {
             return false;
         }
 
-        const previousMessages = state.messages[activeContactId];
-        const messages = previousMessages || [];
-        state.messages[activeContactId] = [
-            ...messages,
-            {
-                id: createId(),
-                direction,
-                text: content,
-                createdAt: new Date().toISOString()
-            }
-        ];
-
+        const message = {
+            id: createId(),
+            sender: account.profile.email,
+            recipient: activeEmail,
+            text: content,
+            createdAt: new Date().toISOString()
+        };
+        database.messages.push(message);
         try {
-            saveState(state);
+            saveDatabase(database);
             render();
             showAlert("");
             return true;
         } catch (error) {
-            if (previousMessages) {
-                state.messages[activeContactId] = previousMessages;
-            } else {
-                delete state.messages[activeContactId];
-            }
+            database.messages.pop();
             showAlert(error.message);
             return false;
         }
@@ -95,40 +103,22 @@ export function initializeChat(state, onEditContact, showAlert) {
 
     messageForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        if (!activeContactId) {
-            return;
+        if (send(messageInput.value)) {
+            messageInput.value = "";
+            messageInput.focus();
         }
-
-        const text = messageInput.value;
-        if (!addMessage("sent", text)) {
-            return;
-        }
-        messageInput.value = "";
-        messageInput.focus();
     });
 
-    incomingForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!activeContactId) {
-            return;
-        }
-
-        if (!addMessage("received", incomingInput.value)) {
-            return;
-        }
-        incomingInput.value = "";
-    });
-
-    document.querySelector("#edit-active-contact").addEventListener("click", () => {
-        if (activeContactId) {
-            onEditContact(activeContactId);
+    manageContactButton.addEventListener("click", () => {
+        if (activeEmail) {
+            onManageContact(activeEmail);
         }
     });
 
     return {
         render,
-        get activeContactId() {
-            return activeContactId;
+        get activeEmail() {
+            return activeEmail;
         }
     };
 }

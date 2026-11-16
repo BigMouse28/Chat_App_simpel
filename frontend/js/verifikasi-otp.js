@@ -1,3 +1,5 @@
+import { createId, findAccountByPhone, loadDatabase, normalizeEmail, saveDatabase } from "./dashboard/storage.js";
+
 const form = document.querySelector(".verification-form");
 const otpInput = document.querySelector("#otp");
 const otpError = document.querySelector("#otp-error");
@@ -36,8 +38,49 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    sessionStorage.setItem("chat-demo-verified-name", sessionStorage.getItem("chat-demo-pending-name") || "");
-    sessionStorage.setItem("chat-demo-verified-email", sessionStorage.getItem("chat-demo-pending-email") || "");
+    const name = sessionStorage.getItem("chat-demo-pending-name") || "";
+    const email = normalizeEmail(sessionStorage.getItem("chat-demo-pending-email") || "");
+    let database;
+    try {
+        database = loadDatabase();
+    } catch (error) {
+        otpError.textContent = error.message;
+        return;
+    }
+
+    if (database.accounts[email]) {
+        otpError.textContent = "Alamat email ini sudah terdaftar. Silakan masuk dengan akun tersebut.";
+        return;
+    }
+
+    if (findAccountByPhone(database, pendingPhone)) {
+        otpError.textContent = "Nomor telepon ini sudah terdaftar pada akun lain.";
+        return;
+    }
+
+    database.accounts[email] = {
+        profile: {
+            id: createId(),
+            name,
+            email,
+            phone: pendingPhone,
+            verifiedAt: new Date().toISOString(),
+            status: "Aktif",
+            bio: "",
+            avatar: ""
+        },
+        contacts: []
+    };
+
+    try {
+        saveDatabase(database);
+    } catch (error) {
+        otpError.textContent = error.message;
+        return;
+    }
+
+    sessionStorage.setItem("chat-demo-verified-name", name);
+    sessionStorage.setItem("chat-demo-verified-email", email);
     sessionStorage.setItem("chat-demo-verified-phone", pendingPhone);
     sessionStorage.setItem("chat-demo-phone-verified", "true");
     sessionStorage.removeItem("chat-demo-pending-name");

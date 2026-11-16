@@ -1,0 +1,318 @@
+:root {
+    color-scheme: light;
+    --color-text: #172033;
+    --color-muted: #475569;
+    --color-link: #0bd0fc;
+    --color-green-dark: rgb(20 70 42 / 92%);
+    --color-green-border: rgb(255 255 255 / 12%);
+    --color-blue: #0785ff;
+    --color-blue-hover: #0876df;
+    --color-page: #000;
+    --color-glass: rgb(55 65 81 / 92%);
+    --color-cream: #fff3dc;
+}
+
+body {
+    color: var(--color-text);
+    background: var(--color-page);
+}
+
+nav,
+footer {
+    color: #cbd5e1;
+}
+
+.back-link,
+.account-link,
+.register-link {
+    color: var(--color-link);
+}
+
+.login-card,
+.registration-card,
+.verification-card,
+.loading-card,
+.account-screen {
+    color: #f9fafb;
+    border-color: rgb(255 255 255 / 20%);
+    background: var(--color-glass);
+    box-shadow: 0 1.5rem 3.5rem rgb(0 0 0 / 45%);
+    backdrop-filter: blur(12px);
+}
+
+.login-card,
+.registration-card,
+.verification-card {
+    border-radius: 1.25rem;
+}
+
+.login-card {
+    width: min(100%, 24rem);
+}
+
+.registration-card,
+.verification-card {
+    width: min(100%, 30rem);
+}
+
+.login-card h1,
+.registration-card h1,
+.verification-card h1,
+.chat-empty-state h2 {
+    color: #fff;
+}
+
+.login-form label,
+.registration-form label,
+.verification-form label,
+.dialog-form > label,
+.avatar-controls > label {
+    color: #f3f4f6;
+}
+
+.login-form input,
+.registration-form input:not([type="hidden"]),
+.verification-form input {
+    border-color: #b7d9c2;
+    color: #172033;
+    background: #fff;
+}
+
+.login-form button,
+.registration-form > .tombol,
+.verify-button,
+.open-button {
+    color: #fff;
+    background: var(--color-blue);
+}
+
+.login-form button:hover,
+.registration-form > .tombol:hover,
+.verify-button:hover,
+.open-button:hover {
+    background: var(--color-blue-hover);
+}
+
+.account-prompt,
+.prototype-note,
+.message,
+.destination,
+footer {
+    color: #d1d5db;
+}
+
+.account-screen .register-prompt,
+.account-screen .message {
+    color: #d1d5db;
+}
+
+.auth-message {
+    color: #713f12;
+    background: #fef9c3;
+}
+
+.auth-message--success {
+    color: #14532d;
+    background: #dcfce7;
+}
+
+.otp-notification {
+    color: #713f12;
+    background: #fefce8;
+}
+
+.daftar-negara {
+    color: #172033;
+    background: #fff;
+}
+
+.error:not(:empty),
+.form-error {
+    color: #a11b1b;
+}
+
+.dashboard {
+    color: var(--color-text);
+}
+
+.topbar,
+.contacts-panel {
+    border-color: rgb(255 255 255 / 12%);
+    background: #000;
+    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 24%);
+}
+
+.brand,
+.profile-button,
+.welcome strong,
+.contacts-heading h1,
+.conversation-person h2 {
+    color: #fff;
+}
+
+.profile-button-text > span,
+.profile-chevron,
+.welcome,
+.contacts-heading p,
+.contact-phone,
+.empty-contacts,
+.empty-messages,
+.conversation-person p,
+.field-hint {
+    color: var(--color-muted);
+}
+
+.logout-button,
+.secondary-button,
+.text-button,
+.contact-action {
+    border-color: var(--color-green-border);
+    color: #f9fafb;
+    background: rgb(255 255 255 / 8%);
+}
+
+.logout-button:hover,
+.secondary-button:hover,
+.text-button:hover,
+.contact-action:hover {
+    color: #fff;
+    background: rgb(255 255 255 / 16%);
+}
+
+.contacts-panel > input,
+.dialog-form input:not([type="file"], [type="hidden"]),
+.dialog-form textarea,
+.dialog-form select,
+.incoming-demo input,
+.message-form textarea {
+    border-color: #b7d9c2;
+    color: #172033;
+    background: #fff;
+}
+
+.contact-item--selected {
+    background: rgb(11 208 252 / 18%);
+}
+
+.contact-name {
+    color: #fff;
+}
+
+.contact-action {
+    padding: 0.2rem;
+    font-size: 0.75rem;
+}
+
+.chat-panel {
+    color: #332b20;
+    background: var(--color-cream);
+}
+
+.chat-empty-state p {
+    color: #645640;
+}
+
+.conversation {
+    border-color: rgb(97 75 40 / 18%);
+    color: #332b20;
+    background: rgb(255 249 237 / 76%);
+    box-shadow: 0 1.5rem 3rem rgb(80 60 30 / 12%);
+}
+
+.conversation-header,
+.message-form,
+.local-storage-note {
+    border-color: rgb(97 75 40 / 16%);
+}
+
+.conversation-person h2 {
+    color: #332b20;
+}
+
+.conversation-person p,
+.local-storage-note {
+    color: #645640;
+}
+
+.message-list {
+    background: rgb(255 243 220 / 72%);
+}
+
+.message--sent {
+    color: #172033;
+    background: #c8f7df;
+}
+
+.message--received {
+    color: #172033;
+    background: #fff;
+}
+
+.message-time {
+    color: #526174;
+}
+
+.local-storage-note,
+.incoming-demo summary {
+    color: #645640;
+}
+
+.send-button,
+.primary-button,
+.icon-button {
+    color: #fff;
+    background: var(--color-blue);
+}
+
+.send-button:hover,
+.primary-button:hover,
+.icon-button:hover {
+    background: var(--color-blue-hover);
+}
+
+.app-dialog {
+    border-color: rgb(255 255 255 / 50%);
+    color: #f9fafb;
+    background: var(--color-glass);
+    backdrop-filter: blur(12px);
+}
+
+.dialog-heading h2 {
+    color: #fff;
+}
+
+.dialog-heading p {
+    color: #d1d5db;
+}
+
+.dialog-form input[readonly] {
+    color: #526174;
+    background: #f3f6fb;
+}
+
+.dialog-close {
+    color: #f9fafb;
+    background: rgb(255 255 255 / 12%);
+}
+
+.dashboard-alert {
+    color: #8a1c1c;
+    background: #fff1f1;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+    outline-color: #0bd0fc;
+}
+
+@media (max-width: 24rem) {
+    .login-card,
+    .registration-card,
+    .verification-card {
+        border-radius: 1rem;
+    }
+}

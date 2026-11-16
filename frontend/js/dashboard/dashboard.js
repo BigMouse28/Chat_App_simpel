@@ -1,10 +1,12 @@
 import { initializeChat } from "./chat.js";
 import { initializeContacts } from "./contacts.js";
 import { initializeProfile } from "./profile.js";
-import { loadState } from "./storage.js";
+import { DATABASE_KEY, loadDatabase, normalizeEmail } from "./storage.js";
 
 const isLoggedIn = sessionStorage.getItem("chat-demo-auth") === "true";
-if (!isLoggedIn) {
+const currentEmail = normalizeEmail(sessionStorage.getItem("chat-demo-user-email") || "");
+
+if (!isLoggedIn || !currentEmail) {
     window.location.replace("login.html");
 } else {
     const main = document.querySelector(".dashboard");
@@ -22,6 +24,8 @@ if (!isLoggedIn) {
     document.querySelector("#logout-button").addEventListener("click", () => {
         sessionStorage.removeItem("chat-demo-auth");
         sessionStorage.removeItem("chat-demo-name");
+        sessionStorage.removeItem("chat-demo-user-email");
+        sessionStorage.removeItem("chat-demo-phone-verified");
         window.location.assign("login.html");
     });
 
@@ -30,24 +34,45 @@ if (!isLoggedIn) {
     });
 
     try {
-        const state = loadState({
-            name: sessionStorage.getItem("chat-demo-verified-name") || sessionStorage.getItem("chat-demo-name") || "Pengguna",
-            email: sessionStorage.getItem("chat-demo-verified-email") || "",
-            phone: sessionStorage.getItem("chat-demo-verified-phone") || ""
-        });
+        const database = loadDatabase();
+        const account = database.accounts[currentEmail];
+        if (!account) {
+            sessionStorage.removeItem("chat-demo-auth");
+            sessionStorage.removeItem("chat-demo-user-email");
+            window.location.replace("login.html");
+        } else {
+            let chat;
+            const contacts = initializeContacts(
+                database,
+                account,
+                (peerEmail) => {
+                    chat?.render(peerEmail);
+                    contacts.render(peerEmail);
+                },
+                showAlert
+            );
+            chat = initializeChat(
+                database,
+                account,
+                (peerEmail) => {
+                    const contact = account.contacts.find((entry) => entry.email === peerEmail);
+                    if (contact) {
+                        contacts.openEdit(contact.id);
+                    } else {
+                        contacts.openAdd(peerEmail);
+                    }
+                },
+                showAlert
+            );
+            initializeProfile(database, account, showAlert);
+            contacts.render();
 
-        let chat;
-        const contacts = initializeContacts(
-            state,
-            (contactId) => {
-                chat?.render(contactId);
-                contacts.render(contactId);
-            },
-            showAlert
-        );
-        chat = initializeChat(state, (contactId) => contacts.openEdit(contactId), showAlert);
-        initializeProfile(state, showAlert);
-        contacts.render();
+            window.addEventListener("storage", (event) => {
+                if (event.key === DATABASE_KEY) {
+                    window.location.reload();
+                }
+            });
+        }
     } catch (error) {
         main.hidden = true;
         showAlert(error.message || "Dashboard tidak dapat dimuat.");

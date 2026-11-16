@@ -1,4 +1,4 @@
-import { isValidName, isValidPhone, saveState } from "./storage.js";
+import { findAccountByPhone, isValidName, isValidPhone, normalizePhone, saveDatabase } from "./storage.js";
 
 function setAvatar(element, name, image) {
     element.replaceChildren();
@@ -14,7 +14,7 @@ function setAvatar(element, name, image) {
     element.textContent = name.trim().charAt(0).toLocaleUpperCase() || "P";
 }
 
-export function initializeProfile(state, showAlert) {
+export function initializeProfile(database, account, showAlert) {
     const dialog = document.querySelector("#profile-dialog");
     const form = document.querySelector("#profile-form");
     const nameInput = document.querySelector("#profile-name");
@@ -27,19 +27,19 @@ export function initializeProfile(state, showAlert) {
     const removePhotoButton = document.querySelector("#remove-profile-photo");
 
     function render() {
-        document.querySelector("#header-name").textContent = state.profile.name;
-        document.querySelector("#header-status").textContent = state.profile.status;
-        setAvatar(document.querySelector("#header-avatar"), state.profile.name, state.profile.avatar);
-        setAvatar(document.querySelector("#profile-avatar"), state.profile.name, state.profile.avatar);
-        removePhotoButton.hidden = !state.profile.avatar;
+        document.querySelector("#header-name").textContent = account.profile.name;
+        document.querySelector("#header-status").textContent = account.profile.status;
+        setAvatar(document.querySelector("#header-avatar"), account.profile.name, account.profile.avatar);
+        setAvatar(document.querySelector("#profile-avatar"), account.profile.name, account.profile.avatar);
+        removePhotoButton.hidden = !account.profile.avatar;
     }
 
     function open() {
-        nameInput.value = state.profile.name;
-        emailInput.value = state.profile.email;
-        phoneInput.value = state.profile.phone;
-        statusInput.value = state.profile.status;
-        bioInput.value = state.profile.bio;
+        nameInput.value = account.profile.name;
+        emailInput.value = account.profile.email;
+        phoneInput.value = account.profile.phone;
+        statusInput.value = account.profile.status;
+        bioInput.value = account.profile.bio;
         photoInput.value = "";
         profileError.textContent = "";
         dialog.showModal();
@@ -67,14 +67,14 @@ export function initializeProfile(state, showAlert) {
 
         const reader = new FileReader();
         reader.addEventListener("load", () => {
-            const previousAvatar = state.profile.avatar;
-            state.profile.avatar = String(reader.result);
+            const previousAvatar = account.profile.avatar;
+            account.profile.avatar = String(reader.result);
             try {
-                saveState(state);
+                saveDatabase(database);
                 profileError.textContent = "";
                 render();
             } catch (error) {
-                state.profile.avatar = previousAvatar;
+                account.profile.avatar = previousAvatar;
                 profileError.textContent = error.message;
                 photoInput.value = "";
             }
@@ -87,14 +87,14 @@ export function initializeProfile(state, showAlert) {
     });
 
     removePhotoButton.addEventListener("click", () => {
-        const previousAvatar = state.profile.avatar;
-        state.profile.avatar = "";
+        const previousAvatar = account.profile.avatar;
+        account.profile.avatar = "";
         try {
-            saveState(state);
+            saveDatabase(database);
             render();
             profileError.textContent = "";
         } catch (error) {
-            state.profile.avatar = previousAvatar;
+            account.profile.avatar = previousAvatar;
             profileError.textContent = error.message;
         }
     });
@@ -116,19 +116,27 @@ export function initializeProfile(state, showAlert) {
             return;
         }
 
-        const previousProfile = { ...state.profile };
-        state.profile.name = name;
-        state.profile.phone = phone;
-        state.profile.status = statusInput.value;
-        state.profile.bio = bioInput.value.trim();
+        const duplicatePhone = findAccountByPhone(database, phone);
+        if (duplicatePhone && duplicatePhone[0] !== account.profile.email
+            && normalizePhone(duplicatePhone[1].profile.phone) === normalizePhone(phone)) {
+            profileError.textContent = "Nomor telepon tersebut sudah digunakan akun lain.";
+            phoneInput.focus();
+            return;
+        }
+
+        const previousProfile = { ...account.profile };
+        account.profile.name = name;
+        account.profile.phone = phone;
+        account.profile.status = statusInput.value;
+        account.profile.bio = bioInput.value.trim();
 
         try {
-            saveState(state);
+            saveDatabase(database);
             render();
             dialog.close();
             showAlert("");
         } catch (error) {
-            state.profile = previousProfile;
+            account.profile = previousProfile;
             profileError.textContent = error.message;
         }
     });

@@ -7,33 +7,33 @@ body {
     margin: 0;
     display: grid;
     place-items: center;
-    overflow: hidden;
+    overflow: auto;
     color: #f9fafb;
-    background:
-        radial-gradient(ellipse at 80% 80%, rgba(8, 181, 31, 0.922), transparent 40%),
-        #15b607e3;
+    background: #000;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .loading-card {
-    width: min(100% - 2rem, 24rem);
-    padding: 3rem 2rem;
+    width: min(100% - 2rem, 30rem);
+    padding: 2rem;
     text-align: center;
-    border: 1px solid rgb(255 255 255 / 10%);
+    border: 1px solid rgb(255 255 255 / 28%);
     border-radius: 1.5rem;
-    background: rgb(17 24 39 / 65%);
-    box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    color: #f9fafb;
+    background: rgb(55 65 81 / 92%);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 45%);
     backdrop-filter: blur(12px);
 }
 
 .account-screen {
     width: min(100% - 2rem, 24rem);
-    padding: 3rem 2rem;
+    padding: 2rem;
     text-align: center;
-    border: 1px solid rgb(255 255 255 / 10%);
+    border: 1px solid rgb(255 255 255 / 28%);
     border-radius: 1.5rem;
-    background: rgb(17 24 39 / 65%);
-    box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    color: #f9fafb;
+    background: rgb(55 65 81 / 92%);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 45%);
     backdrop-filter: blur(12px);
     animation: appear 0.35s ease-out;
 }
@@ -43,7 +43,7 @@ body {
     padding: 0.85rem 1rem;
     border: 0;
     border-radius: 0.65rem;
-    color: #3f9ee7;
+    color: #fff;
     background-color: #047dfe;
     font: inherit;
     font-weight: 700;
@@ -100,7 +100,7 @@ h1 {
 
 .message {
     margin: 0.6rem 0 1.75rem;
-    color: #9ca3af;
+    color: #d1d5db;
     font-size: 0.95rem;
 }
 
@@ -108,8 +108,8 @@ h1 {
     width: 2rem;
     height: 2rem;
     margin: 0 auto;
-    border: 3px solid rgb(255 255 255 / 18%);
-    border-top-color: #93c5fd;
+    border: 3px solid rgb(23 32 51 / 18%);
+    border-top-color: #0785ff;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
