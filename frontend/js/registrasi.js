@@ -248,14 +248,30 @@ passwordInput.addEventListener("input", () => {
 confirmationInput.addEventListener("input", validateConfirmation);
 
 form.addEventListener("submit", (event) => {
+    event.preventDefault();
     const isPhoneValid = validatePhone();
     const isPasswordValid = validatePassword();
     const isConfirmationValid = validateConfirmation();
     const isValid = isPhoneValid && isPasswordValid && isConfirmationValid;
     if (!isValid) {
-        event.preventDefault();
         form.reportValidity();
+        return;
     }
+
+    const fullName = [
+        form.elements.nama_depan.value.trim(),
+        form.elements.nama_belakang.value.trim()
+    ].filter(Boolean).join(" ");
+
+    sessionStorage.removeItem("chat-demo-phone-verified");
+    sessionStorage.removeItem("chat-demo-auth");
+    sessionStorage.setItem("chat-demo-pending-name", fullName);
+    sessionStorage.setItem("chat-demo-pending-email", form.elements.email.value.trim());
+    sessionStorage.setItem(
+        "chat-demo-pending-phone",
+        `${countryCodeInput.value}${phoneInput.value.replace(/\D/g, "")}`
+    );
+    window.location.assign("verifikasi-otp.html");
 });
 
 renderCountries();

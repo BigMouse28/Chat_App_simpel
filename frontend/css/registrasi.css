@@ -241,6 +241,24 @@ h1 {
     background: #12578f;
 }
 
+.account-prompt {
+    margin: 1rem 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.account-link {
+    color: #1769aa;
+    font-weight: 600;
+    text-underline-offset: 0.15em;
+}
+
+.account-link:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 3px;
+}
+
 footer {
     color: #64748b;
     font-size: 0.85rem;

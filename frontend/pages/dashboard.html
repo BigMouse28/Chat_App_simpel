@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <title>Dashboard - Chat App Simpel</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="../index.html" aria-label="Chat App Simpel">
+            <span class="brand-icon" aria-hidden="true">C</span>
+            <span>Chat App Simpel</span>
+        </a>
+        <div class="account">
+            <button type="button" class="profile-button" id="open-profile" aria-haspopup="dialog">
+                <span class="avatar avatar--small" id="header-avatar" aria-hidden="true">P</span>
+                <span class="profile-button-text">
+                    <strong id="header-name">Pengguna</strong>
+                    <span id="header-status">Aktif</span>
+                </span>
+                <span class="profile-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <button type="button" class="logout-button" id="logout-button">Keluar</button>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <aside class="contacts-panel" aria-labelledby="contacts-title">
+            <div class="contacts-heading">
+                <div>
+                    <h1 id="contacts-title">Kontak</h1>
+                    <p>Temukan dan mulai obrolan.</p>
+                </div>
+                <button type="button" class="icon-button add-contact-button" id="open-add-contact" aria-label="Tambah kontak" title="Tambah kontak">+</button>
+            </div>
+
+            <label class="sr-only" for="search-contact">Cari kontak</label>
+            <input id="search-contact" type="search" placeholder="Cari nama atau nomor">
+
+            <ul class="contact-list" id="contact-list" aria-label="Daftar kontak"></ul>
+            <p class="empty-contacts" id="empty-contacts">Belum ada kontak. Tambahkan kontak untuk memulai obrolan.</p>
+        </aside>
+
+        <section class="chat-panel" aria-label="Area obrolan">
+            <div class="chat-empty-state" id="empty-chat">
+                <div class="chat-icon" aria-hidden="true">•••</div>
+                <h2 id="chat-title">Obrolan pribadi Anda</h2>
+                <p>Pilih kontak atau tambahkan kontak baru untuk memulai.</p>
+            </div>
+
+            <section class="conversation" id="conversation" aria-label="Percakapan" hidden>
+                <header class="conversation-header">
+                    <span class="avatar" id="conversation-avatar" aria-hidden="true">K</span>
+                    <div class="conversation-person">
+                        <h2 id="conversation-name">Kontak</h2>
+                        <p id="conversation-phone"></p>
+                        <p id="conversation-bio"></p>
+                    </div>
+                    <button type="button" class="text-button" id="edit-active-contact">Ubah kontak</button>
+                </header>
+
+                <ol class="message-list" id="message-list" aria-live="polite" aria-label="Pesan"></ol>
+                <p class="empty-messages" id="empty-messages">Belum ada pesan. Sapa kontak Anda!</p>
+
+                <form class="message-form" id="message-form">
+                    <label class="sr-only" for="message-input">Tulis pesan</label>
+                    <textarea id="message-input" name="message" rows="1" maxlength="2000" placeholder="Tulis pesan..." required></textarea>
+                    <button type="submit" class="send-button">Kirim</button>
+                </form>
+
+                <details class="incoming-demo">
+                    <summary>Simulasikan pesan masuk dari kontak</summary>
+                    <form id="incoming-message-form">
+                        <label class="sr-only" for="incoming-message-input">Pesan masuk simulasi</label>
+                        <input id="incoming-message-input" name="message" maxlength="2000" placeholder="Tulis pesan sebagai kontak" required>
+                        <button type="submit" class="text-button">Tambahkan pesan</button>
+                    </form>
+                </details>
+                <p class="local-storage-note">Kontak dan pesan hanya tersimpan di peramban ini, tidak dienkripsi, dan tidak disinkronkan. Pesan masuk di atas adalah simulasi; pengiriman ke pengguna lain memerlukan backend.</p>
+            </section>
+        </section>
+    </main>
+
+    <dialog class="app-dialog" id="profile-dialog" aria-labelledby="profile-title">
+        <form class="dialog-form" id="profile-form">
+            <div class="dialog-heading">
+                <div>
+                    <h2 id="profile-title">Profil saya</h2>
+                    <p>Informasi profil disimpan di peramban ini.</p>
+                </div>
+                <button type="button" class="dialog-close" data-close-dialog aria-label="Tutup">×</button>
+            </div>
+
+            <div class="profile-preview">
+                <span class="avatar avatar--large" id="profile-avatar" aria-hidden="true">P</span>
+                <div class="avatar-controls">
+                    <label for="profile-photo">Foto profil</label>
+                    <input type="file" id="profile-photo" accept="image/*">
+                    <button type="button" class="text-button" id="remove-profile-photo" hidden>Hapus foto</button>
+                    <p class="field-hint">Pilih berkas gambar hingga 1 MB.</p>
+                </div>
+            </div>
+
+            <label for="profile-name">Nama</label>
+            <input id="profile-name" name="name" autocomplete="name" maxlength="80" required>
+
+            <label for="profile-email">Alamat email</label>
+            <input id="profile-email" name="email" type="email" readonly>
+
+            <label for="profile-phone">Nomor telepon</label>
+            <input id="profile-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="[+]?[0-9 ]{6,18}" required>
+
+            <label for="profile-status">Status</label>
+            <select id="profile-status" name="status">
+                <option value="Aktif">Aktif</option>
+                <option value="Sibuk">Sibuk</option>
+                <option value="Tidak di tempat">Tidak di tempat</option>
+            </select>
+
+            <label for="profile-bio">Info tentang saya</label>
+            <textarea id="profile-bio" name="bio" rows="3" maxlength="160" placeholder="Ceritakan sedikit tentang diri Anda"></textarea>
+
+            <p class="form-error" id="profile-error" role="alert"></p>
+            <div class="dialog-actions">
+                <button type="button" class="secondary-button" data-close-dialog>Tutup</button>
+                <button type="submit" class="primary-button">Simpan perubahan</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="app-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+        <form class="dialog-form" id="contact-form">
+            <div class="dialog-heading">
+                <div>
+                    <h2 id="contact-dialog-title">Tambah kontak</h2>
+                    <p>Masukkan nama dan nomor telepon kontak.</p>
+                </div>
+                <button type="button" class="dialog-close" data-close-dialog aria-label="Tutup">×</button>
+            </div>
+            <input type="hidden" id="contact-id">
+
+            <label for="contact-name">Nama</label>
+            <input id="contact-name" name="name" autocomplete="off" maxlength="80" pattern="[^0-9]*" required>
+
+            <label for="contact-phone">Nomor telepon</label>
+            <input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="off" pattern="[+]?[0-9 ]{6,18}" required>
+            <p class="field-hint">Pada prototipe ini, nomor telepon tidak diperiksa ke server.</p>
+
+            <label for="contact-bio">Info</label>
+            <textarea id="contact-bio" name="bio" rows="2" maxlength="160" placeholder="Info singkat (opsional)"></textarea>
+
+            <p class="form-error" id="contact-error" role="alert"></p>
+            <div class="dialog-actions">
+                <button type="button" class="secondary-button" data-close-dialog>Batal</button>
+                <button type="submit" class="primary-button" id="save-contact-button">Simpan kontak</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script type="module" src="../js/dashboard/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    color: #172033;
+    background: #f3f6fb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+nav,
+footer {
+    width: min(100%, 32rem);
+    margin-inline: auto;
+}
+
+.otp-notification {
+    position: fixed;
+    z-index: 3;
+    top: 1rem;
+    left: 50%;
+    width: min(calc(100% - 2rem), 32rem);
+    padding: 1rem 1rem 1rem 1.15rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid #facc15;
+    border-radius: 0.75rem;
+    color: #713f12;
+    background: #fefce8;
+    box-shadow: 0 0.75rem 2rem rgb(15 23 42 / 18%);
+    animation: notification-enter 0.3s ease-out;
+    transform: translateX(-50%);
+}
+
+.otp-notification[hidden] {
+    display: none;
+}
+
+.notification-title,
+.notification-message,
+.notification-note {
+    margin: 0;
+}
+
+.notification-title {
+    font-weight: 700;
+}
+
+.notification-message {
+    margin-top: 0.2rem;
+}
+
+.notification-message strong {
+    letter-spacing: 0.12em;
+}
+
+.notification-note {
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+}
+
+.notification-close {
+    flex: 0 0 auto;
+    padding: 0 0.2rem;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.notification-close:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 3px;
+}
+
+.back-link {
+    color: #1769aa;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding-block: 2rem;
+}
+
+.verification-card {
+    width: min(100%, 32rem);
+    padding: 2rem;
+    border: 1px solid #e1e7ef;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 1rem 2.5rem rgb(20 38 70 / 8%);
+}
+
+h1 {
+    margin: 0 0 1rem;
+    font-size: 1.6rem;
+}
+
+.destination {
+    margin: 0 0 1rem;
+    color: #526174;
+    line-height: 1.5;
+}
+
+.verification-form {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.verification-form label {
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.verification-form input {
+    width: 100%;
+    padding: 0.8rem 0.85rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    font: inherit;
+    letter-spacing: 0.15em;
+}
+
+.verification-form input:focus-visible,
+.verify-button:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+}
+
+.verification-form input[aria-invalid="true"] {
+    border-color: #b42318;
+}
+
+.error:not(:empty) {
+    margin: 0;
+    color: #b42318;
+    font-size: 0.85rem;
+}
+
+.verify-button {
+    margin-top: 0.5rem;
+    padding: 0.8rem 1rem;
+    border: 0;
+    border-radius: 0.5rem;
+    color: #fff;
+    background: #1769aa;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.verify-button:hover {
+    background: #12578f;
+}
+
+.account-prompt {
+    margin: 1.25rem 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.account-link {
+    color: #1769aa;
+    font-weight: 600;
+    text-underline-offset: 0.15em;
+}
+
+.account-link:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 3px;
+}
+
+footer {
+    color: #64748b;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+@keyframes notification-enter {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+@media (max-width: 24rem) {
+    body {
+        padding: 1rem;
+    }
+
+    .verification-card {
+        padding: 1.25rem;
+    }
+}

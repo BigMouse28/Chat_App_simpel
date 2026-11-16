@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <title>Verifikasi Nomor - Chat App Simpel</title>
+    <link rel="stylesheet" href="../css/verifikasi-otp.css">
+</head>
+<body>
+    <div class="otp-notification" id="otp-notification" role="status" aria-live="polite" hidden>
+        <div>
+            <p class="notification-title">Kode OTP demo</p>
+            <p class="notification-message">
+                Kode verifikasi kamu: <strong>123456</strong>
+            </p>
+            <p class="notification-note">Simulasi saja; kode tidak dikirim melalui WhatsApp.</p>
+        </div>
+        <button class="notification-close" id="close-notification" type="button" aria-label="Tutup notifikasi OTP">
+            &times;
+        </button>
+    </div>
+
+    <nav>
+        <a href="registrasi.html" class="back-link">Kembali ke registrasi</a>
+    </nav>
+
+    <main>
+        <section class="verification-card" aria-labelledby="verification-title">
+            <h1 id="verification-title">Verifikasi nomor WhatsApp</h1>
+            <p class="destination">
+                Kode verifikasi untuk nomor <strong id="phone-number">nomor yang didaftarkan</strong>
+            </p>
+            <form class="verification-form">
+                <label for="otp">Kode OTP</label>
+                <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    placeholder="Masukkan 6 digit kode"
+                    aria-describedby="otp-error"
+                    required
+                >
+                <p class="error" id="otp-error" role="alert"></p>
+                <button type="submit" class="verify-button">Verifikasi nomor</button>
+            </form>
+            <p class="account-prompt">
+                Salah memasukkan nomor?
+                <a class="account-link" href="registrasi.html">Kembali ke registrasi</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p> &copy; 2026 Chat App Simpel. All rights reserved.</p>
+    </footer>
+    <script src="../js/verifikasi-otp.js" defer></script>
+</body>
+</html>
